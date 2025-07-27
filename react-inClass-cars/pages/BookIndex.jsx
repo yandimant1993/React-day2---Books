@@ -1,31 +1,31 @@
-import { CarFilter } from "../cmps/BookFilter.jsx"
-import { CarList } from "../cmps/BookList.jsx"
-import { carService } from "../services/book.service.js"
+import { BookFilter } from "../cmps/BookFilter.jsx"
+import { BookList } from "../cmps/BookList.jsx"
+import { bookService } from "../services/book.service.js"
 
 const { useState, useEffect } = React
 
-export function CarIndex() {
+export function BookIndex() {
 
-    const [cars, setCars] = useState(null)
+    const [books, setBooks] = useState(null)
     // const [error, setError] = useState('')
-    const [filterBy, setFilterBy] = useState(carService.getDefaultFilter())
+    const [filterBy, setFilterBy] = useState(bookService.getDefaultFilter())
 
-
+    console.log(books)
     useEffect(() => {
-        loadCars()
+        loadBooks()
     }, [filterBy])
 
 
-    function loadCars() {
-        carService.query(filterBy)
-            .then(cars => setCars(cars))
+    function loadBooks() {
+        bookService.query(filterBy)
+            .then(books => setBooks(books))
             .catch(err => console.log('err:', err))
     }
 
-    function onRemoveCar(carId) {
-        carService.remove(carId)
+    function onRemoveBook(bookId) {
+        bookService.remove(bookId)
             .then(() => (
-                setCars(cars => cars.filter(car => car.id !== carId))
+                setBooks(books => books.filter(book => book.id !== bookId))
             ))
             .catch(err => console.log('err:', err))
     }
@@ -35,11 +35,12 @@ export function CarIndex() {
     }
     // console.log('Render');
 
-    if (!cars) return <div>Loading...</div>
+    if (!books) return <div>Loading...</div>
     return (
-        <section className="car-index">
-            <CarFilter handleSetFilter={handleSetFilter} defaultFilter={filterBy} />
-            <CarList onRemoveCar={onRemoveCar} cars={cars} />
+        <section className="book-index">
+            {/* <h1>hi</h1> */}
+            <BookFilter handleSetFilter={handleSetFilter} defaultFilter={filterBy} />
+            <BookList onRemoveBook={onRemoveBook} books={books} />
 
             {/* {!error && <CarList onRemoveCar={onRemoveCar} cars={cars} />}
             {error && <p>{error}</p>} */}

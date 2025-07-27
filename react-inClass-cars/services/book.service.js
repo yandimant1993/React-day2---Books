@@ -2,7 +2,7 @@ import { getRandomIntInclusive, loadFromStorage, makeId, makeLorem, saveToStorag
 import { storageService } from './async-storage.service.js'
 
 const BOOK_KEY = 'bookDB'
-_createbooks()
+_createBooks()
 
 export const bookService = {
     query,
@@ -55,13 +55,37 @@ function getDefaultFilter() {
 function _createBooks() {
     let books = loadFromStorage(BOOK_KEY)
     if (!books || !books.length) {
-       
+        const ctgs = ['Love', 'Fiction', 'Poetry', 'Computers', 'Religion']
+        const books = []
+        for (let i = 0; i < 20; i++) {
+            const book = {
+                id: makeId(),
+                title: makeLorem(2),
+                subtitle: makeLorem(4),
+                authors: [
+                    makeLorem(1)
+                ],
+                publishedDate: getRandomIntInclusive(1950, 2024),
+                description: makeLorem(20),
+                pageCount: getRandomIntInclusive(20, 600),
+                categories: [ctgs[getRandomIntInclusive(0, ctgs.length - 1)]],
+                thumbnail: `http://coding-academy.org/books-photos/${i + 1}.jpg`,
+                language: "en",
+                listPrice: {
+                    amount: getRandomIntInclusive(80, 500),
+                    currencyCode: "EUR",
+                    isOnSale: Math.random() > 0.7
+                }
+            }
+            books.push(book)
+        }
+        console.log('books', books)
         saveToStorage(BOOK_KEY, books)
     }
 }
 
-function _createBook(title) {
-    book.id = makeId()
-    const book = getEmptyBook(id,title)
-    return book
-}
+// function _createBook(title) {
+//     book.id = makeId()
+//     const book = getEmptyBook(id, title)
+//     return book
+// }

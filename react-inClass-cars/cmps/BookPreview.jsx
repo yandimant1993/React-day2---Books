@@ -1,11 +1,11 @@
-export function CarPreview({ car }) {
+export function BookPreview({ book }) {
 
-    const { vendor, speed } = car
+    const { title, id, thumbnail } = book
     return (
-        <article className="car-preview">
-            <h2>Vendor: {vendor}</h2>
-            <h4>Car Speed: {speed}</h4>
-            <img src={`../assets/img/${vendor}.png`} alt="Car Image" />
+        <article className="book-preview">
+            <h2>title: {title}</h2>
+            <h4>Book id: {id}</h4>
+            <img src={thumbnail} alt="Book Image" />
         </article>
     )
 }

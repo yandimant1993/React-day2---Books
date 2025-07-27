@@ -1,19 +1,18 @@
-import { CarPreview } from "./BookPreview.jsx";
+import { BookPreview } from "./BookPreview.jsx";
 
-export function CarList({ cars, onRemoveCar }) {
+export function BookList({ books, onRemoveBook }) {
 
     return (
-        <ul className="car-list container">
-            {cars.map(car => (
-                <li key={car.id}>
-                    <CarPreview car={car} />
+        <ul className="book-list container">
+            {books.map(book => (
+                <li key={book.id}>
+                    <BookPreview book={book} />
                     <section>
-                        <button onClick={() => onRemoveCar(car.id)}>Remove</button>
+                        <button onClick={() => onRemoveBook(book.id)}>Remove</button>
                         <button>Details</button>
                     </section>
                 </li>
             ))}
         </ul>
     )
-
 }
