@@ -1,12 +1,14 @@
 import { BookFilter } from "../cmps/BookFilter.jsx"
 import { BookList } from "../cmps/BookList.jsx"
 import { bookService } from "../services/book.service.js"
+import { BookDetails } from "../cmps/BookDetails.jsx"
 
 const { useState, useEffect } = React
 
 export function BookIndex() {
 
     const [books, setBooks] = useState(null)
+    const [myBook, onSetBook] = useState(null)
     // const [error, setError] = useState('')
     const [filterBy, setFilterBy] = useState(bookService.getDefaultFilter())
 
@@ -20,6 +22,10 @@ export function BookIndex() {
         bookService.query(filterBy)
             .then(books => setBooks(books))
             .catch(err => console.log('err:', err))
+    }
+
+    function handleSetBook(book) {
+        onSetBook(book)
     }
 
     function onRemoveBook(bookId) {
@@ -39,8 +45,14 @@ export function BookIndex() {
     return (
         <section className="book-index">
             {/* <h1>hi</h1> */}
-            <BookFilter handleSetFilter={handleSetFilter} defaultFilter={filterBy} />
-            <BookList onRemoveBook={onRemoveBook} books={books} />
+            if(!myBook){
+                <React.Fragment>
+                    <BookFilter handleSetFilter={handleSetFilter} defaultFilter={filterBy} />
+                    <BookList onRemoveBook={onRemoveBook} books={books} handleSetBook={handleSetBook} />
+                </React.Fragment>
+            }
+            if(myBook)
+            {myBook && <BookDetails book={myBook} onClose={() => onSetBook(null)} />}
 
             {/* {!error && <CarList onRemoveCar={onRemoveCar} cars={cars} />}
             {error && <p>{error}</p>} */}
