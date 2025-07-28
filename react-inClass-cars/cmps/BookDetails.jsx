@@ -11,6 +11,8 @@ export function BookDetails({ book, onClose }) {
                 <h2>{book.title}</h2>
                 <h3>{book.subtitle}</h3>
                 <p>{book.description}</p>
+                <span>Price:{book.listPrice.amount}</span>
+                <br></br>
                 <img src={book.thumbnail} />
                 <button onClick={onClose}>Close</button>
             </dialog>

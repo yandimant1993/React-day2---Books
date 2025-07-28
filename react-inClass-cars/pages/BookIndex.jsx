@@ -45,18 +45,21 @@ export function BookIndex() {
     return (
         <section className="book-index">
             {/* <h1>hi</h1> */}
-            if(!myBook){
-                <React.Fragment>
-                    <BookFilter handleSetFilter={handleSetFilter} defaultFilter={filterBy} />
-                    <BookList onRemoveBook={onRemoveBook} books={books} handleSetBook={handleSetBook} />
-                </React.Fragment>
-            }
-            if(myBook)
+            myBook ?
             {myBook && <BookDetails book={myBook} onClose={() => onSetBook(null)} />}
+            :
+            <React.Fragment>
+                <BookFilter handleSetFilter={handleSetFilter} defaultFilter={filterBy} />
+                <BookList onRemoveBook={onRemoveBook} books={books} handleSetBook={handleSetBook} />
+            </React.Fragment>
+
+
 
             {/* {!error && <CarList onRemoveCar={onRemoveCar} cars={cars} />}
             {error && <p>{error}</p>} */}
-        </section>
+
+            </section>
+        
     )
 
 }

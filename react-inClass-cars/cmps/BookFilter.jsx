@@ -72,8 +72,8 @@ export function BookFilter({ defaultFilter, handleSetFilter }) {
                 <label htmlFor="txt">title</label>
                 <input onChange={handleChange} name="txt" value={txt} id="txt" type="text" />
 
-                <label htmlFor="id">id</label>
-                <input onChange={handleChange} name="minSpeed" value={id} id="minSpeed" type="number" />
+                <label htmlFor="id">Min price</label>
+                <input onChange={handleChange} name="minPrice" value={id} id="minPrice" type="number" />
             </form>
             {/* <button onClick={onSearch}>Search</button> */}
         </section>

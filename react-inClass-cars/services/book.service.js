@@ -20,8 +20,8 @@ function query(filterBy = {}) {
                 const regExp = new RegExp(filterBy.txt, 'i')
                 books = books.filter(book => regExp.test(book.title))
             }
-            if (filterBy.id) {
-                books = books.filter(book => book.speed >= filterBy.id)
+            if (filterBy.minPrice) {
+                books = books.filter(book => book.listPrice.amount >= filterBy.minPrice)
             }
             return books
         })
@@ -49,7 +49,7 @@ function getEmptyBook() {
 }
 
 function getDefaultFilter() {
-    return { txt: '', id: '', data: { txtData: '' } }
+    return { txt: '', minPrice: 0 , maxPrice: Infinity }
 }
 
 function _createBooks() {
